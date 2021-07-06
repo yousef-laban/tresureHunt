@@ -1,9 +1,12 @@
 import * as actiontype from "./types";
-import axios from "axios";
+import instance from "./instance";
 
 export const fetchTreasure = () => async (dispatch) => {
   try {
-    const res = await axios.get("http://localhost:8000/things/treasure");
+    const token = document.cookie;
+    console.log(token);
+    instance.defaults.headers.common.Authorization = `Bearer ${token}`;
+    const res = await instance.get("/things/treasure");
     dispatch({
       type: actiontype.FETCH_TREASURE,
       payload: res.data,
@@ -15,7 +18,7 @@ export const fetchTreasure = () => async (dispatch) => {
 
 export const fetchGarbage = () => async (dispatch) => {
   try {
-    const res = await axios.get("http://localhost:8000/things/garbage");
+    const res = await instance.get("/things/garbage");
     dispatch({
       type: actiontype.FETCH_GARBAGE,
       payload: res.data,

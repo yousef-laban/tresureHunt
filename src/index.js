@@ -10,10 +10,11 @@ import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import store from "./store/index";
 
-import { fetchTreasure, fetchGarbage } from "./store/actions/thingsActions";
+import { fetchGarbage } from "./store/actions/thingsActions";
+import { checkForToken } from "./store/actions/authActions";
 
-store.dispatch(fetchTreasure());
 store.dispatch(fetchGarbage());
+store.dispatch(checkForToken());
 
 ReactDOM.render(
   <React.StrictMode>
